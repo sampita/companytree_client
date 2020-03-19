@@ -1,7 +1,7 @@
 // CompanySearch module searches existing Companies
 
 import React, { Component } from "react";
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Button } from 'semantic-ui-react';
 import APIManager from "../../modules/APIManager";
 
 class CompanySearch extends Component {
@@ -20,7 +20,7 @@ class CompanySearch extends Component {
         APIManager.getAllNoAuth("companies").then(response => {
             const newCompanies = [];
             for (const item of response) {
-                let newItem = {key: `${item.id}`, text: `${item.name}`}
+                let newItem = { key: `${item.id}`, text: `${item.name}` }
                 newCompanies.push(newItem);
             }
             const uniqueCompanies = [...new Set(newCompanies)]
@@ -42,25 +42,33 @@ class CompanySearch extends Component {
     }
 
     render() {
+        console.log("this.props companySearch", this.props)
         return (
-            <Dropdown
-                placeholder='Select Company'
-                fluid
-                search
-                selection
-                options={this.state.companies}
-            />
-            // <form onSubmit={this.handleSubmit}>
-            //     <label>Find Your Company:</label>
-            //         <select value={this.state.value} onChange={this.handleChange}>
-            //             {this.state.companies.map((company, index) => (
-            //                 <option onClick={this.handleChange} key={index} value={company}>
-            //                     {company}
-            //                 </option>
-            //             ))}
-            //         </select>
-            //     <input type="submit" value="Submit" />
-            // </form>
+            <>
+                <Dropdown
+                    id="company"
+                    placeholder='Select Company'
+                    fluid
+                    search
+                    selection
+                    options={this.state.companies}
+                    onChange={(evt) => this.props.handleChange}
+                    value={this.state.value}
+                />
+                <h5>Don't see your company listed?</h5>
+                <Button>Register Your Company</Button>
+                {/* <form onSubmit={this.handleSubmit}>
+                        <label>Find Your Company:</label>
+                            <select value={this.state.value} onChange={this.handleChange}>
+                                {this.state.companies.map((company, index) => (
+                                <option onClick={this.handleChange} key={index} value={company}>
+                                    {company}
+                                </option>
+                            ))}
+                        </select>
+                    <input type="submit" value="Submit" />
+                </form> */}
+            </>
         );
     }
 }
