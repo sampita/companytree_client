@@ -4,6 +4,7 @@ import Welcome from './Welcome';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import Tree from './employee/EmployeeTree';
+import EmployeeAddForm from './employee/EmployeeAddForm';
 
 class ApplicationViews extends Component {
 
@@ -32,6 +33,15 @@ class ApplicationViews extends Component {
                 <Route exact path="/home" render={(props) => { 
                     if (this.props.isAuthenticated()) {
                         return <Tree
+                            {...props}
+                            {...this.props} />
+                    } else {
+                        return <Redirect to="/" />
+                    }
+                }} />
+                <Route exact path="/addemployee" render={(props) => {
+                    if (this.props.isAuthenticated()) {
+                        return <EmployeeAddForm
                             {...props}
                             {...this.props} />
                     } else {
