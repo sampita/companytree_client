@@ -52,7 +52,7 @@ export default class Tree extends React.Component {
     
     divStyle = {
         height: '100%',
-        margin: '0px auto',
+        margin: 'none',
     };
 
     componentDidMount() {
@@ -82,13 +82,13 @@ export default class Tree extends React.Component {
 
             let new_config = {
                 type: 'organization down',
-                toolbar_items: {
-                    "Click Me": {
-                        events_click: function () {
-                            alert("Button clicked");
-                        }
-                    }
-                },
+                // toolbar_items: {
+                //     "Click Me": {
+                //         events_click: function () {
+                //             alert("Button clicked");
+                //         }
+                //     }
+                // },
                 line: { color: '#004080', width: 1 },
                 series: [
                     {
