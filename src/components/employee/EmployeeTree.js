@@ -65,7 +65,7 @@ export default class Tree extends React.Component {
                     name: `${employee.user.first_name} ${employee.user.last_name}`,
                     id: `${employee.id}`,
                     attributes: {
-                        'img': `${employee.image_url}`,
+                        // 'img': `${employee.image_url}`,
                         'data': `<ul><li>${getDepartmentById(employee.department_id)}</li><li>${employee.position}</li><li><i>${employee.location}</i></li></ul>`,
                         'tasks': `<ul><li>email: ${employee.user.email}</li><li>phone: ${employee.phone}</li><li>slack: ${employee.slack}</li></ul>`
                     }
@@ -73,6 +73,10 @@ export default class Tree extends React.Component {
                 if (employee.supervisor_id !== null) {
                     newItem.parent = `${employee.supervisor_id}`
                 }
+                if (employee.image_url !== null) {
+                    newItem.attributes.img = `${employee.image_url}`
+                }
+                else (newItem.attributes.img = "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png")
 
                 allEmployees.push(newItem);
             }
