@@ -37,9 +37,6 @@ class EmployeeAddForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        // if (!event.target.checkValidity()) {
-        //     return alert('Complete all fields')
-        // } else {
         const newEmployee = {
             email: this.state.email,
             username: this.state.username,

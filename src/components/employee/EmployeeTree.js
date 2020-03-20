@@ -114,6 +114,7 @@ export default class Tree extends React.Component {
                         points: allEmployees
                     }
                 ],
+                height: 500
             }
             this.setState({
                 config: new_config
