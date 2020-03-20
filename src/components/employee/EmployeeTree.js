@@ -65,7 +65,6 @@ export default class Tree extends React.Component {
                     name: `${employee.user.first_name} ${employee.user.last_name}`,
                     id: `${employee.id}`,
                     attributes: {
-                        // 'img': `${employee.image_url}`,
                         'data': `<ul><li>${getDepartmentById(employee.department_id)}</li><li>${employee.position}</li><li><i>${employee.location}</i></li></ul>`,
                         'tasks': `<ul><li>email: ${employee.user.email}</li><li>phone: ${employee.phone}</li><li>slack: ${employee.slack}</li></ul>`
                     }

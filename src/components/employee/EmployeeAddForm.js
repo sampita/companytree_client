@@ -45,26 +45,22 @@ class EmployeeAddForm extends Component {
             username: this.state.username,
             first_name: this.state.firstName,
             last_name: this.state.lastName,
-            password: "",
-            departmentId: null,
-            supervisorId: null,
-            position: "",
-            location: "",
-            bio: null,
-            image_url: null,
-            tasks: null,
-            phone: null,
-            slack: null,
-            is_admin: false,
-            departments: [],
-            employees: [],
-            department: "",
-            supervisor: ""
+            password: this.state.password,
+            department_id: this.state.departmentId,
+            supervisor_id: this.state.supervisorId,
+            position: this.state.position,
+            location: this.state.location,
+            bio: this.state.bio,
+            image_url: this.state.image_url,
+            tasks: this.state.tasks,
+            phone: this.state.phone,
+            slack: this.state.slack,
+            is_admin: false
         }
 
-        APIManager.post('products', newEmployee)
+        APIManager.post('employees', newEmployee)
             .then((response) => {
-                this.props.history.push(`/products/${response.id}`)
+                this.props.history.push(`/employees/${response.id}`)
             })
 
     }
