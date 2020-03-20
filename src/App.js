@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ApplicationViews from './components/ApplicationViews'
 import { withRouter } from 'react-router-dom';
+import NavBar from './components/navbar/NavBar';
 
 
 class CompanyTree extends Component {
@@ -57,20 +58,23 @@ class CompanyTree extends Component {
       }))
   }
 
+  //clears user from sessionStorage and redirects to home page
   logoutUser = () => {
-    //clears user from localStorage and redirects to home page
-    this.props.clearUser();
-    this.props.history.push('/');
+    sessionStorage.removeItem("auth_token")
+    this.setState({ user: this.isAuthenticated() })
   }
 
   render() {
     return (
       <>
+        <NavBar 
+          logoutUser={this.logoutUser}
+          isAuthenticated={this.isAuthenticated} />
         <ApplicationViews
           isAuthenticated={this.isAuthenticated}
           registerUser={this.registerUser}
           loginUser={this.loginUser}
-          logoutUser={this.logoutUser}    />
+          logoutUser={this.logoutUser} />
       </>
     );
   }
