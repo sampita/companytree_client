@@ -24,12 +24,6 @@ class Register extends Component {
         this.setState(stateToChange)
     }
 
-    handleInputChange2 = (evt) => {
-        let stateToChange = {}
-        stateToChange[evt.target.id] = evt.target.value
-        this.setState(stateToChange)
-    }
-
     handleChange = (evt) => {
         this.setState({ value: evt.target.value });
     }
@@ -74,16 +68,22 @@ class Register extends Component {
                 <Form onSubmit={this.handleRegister}>
                     <section>
                         <h3>Step 1: Find Your Company:</h3>
-                        <Dropdown
+                        <select defaultValue="no" id="companies" value={this.state.value} onChange={this.handleInputChange}>
+                        <option value="no" disabled>Select your option</option>
+                            {this.state.companies.map(company => {
+                                return <option key={company.key} value={company.key}>{company.text}</option>
+                            })}
+                        </select>
+                        {/* <Dropdown
                             id="company"
                             placeholder='Select Company'
                             fluid
-                            search
+                            // search
                             selection
                             options={this.state.companies}
-                            onChange={(evt) => this.handleChange}
-                            value={this.state.value}
-                        />
+                            // onChange={(evt) => this.handleInputChange(evt)}
+                            // value={this.state.value}
+                        /> */}
                         <h4>Don't see your company listed?</h4>
                         <Button>Register Your Company</Button>
                         {/* <CompanySearch

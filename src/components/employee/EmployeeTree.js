@@ -2,6 +2,13 @@ import React from 'react';
 import { JSCharting } from 'jscharting-react';
 import APIManager from '../../modules/APIManager';
 
+const getDepartmentById = (id) => {
+    const departmentMap = {
+        "1": "Human Resources",
+        "2": "Finance"
+    }
+    return id in departmentMap ? departmentMap[id] : null;
+}
 
 export default class Tree extends React.Component {
     
@@ -59,7 +66,7 @@ export default class Tree extends React.Component {
                     id: `${employee.id}`,
                     attributes: {
                         'img': `${employee.image_url}`,
-                        'data': `<ul><li>${employee.department}</li><li>${employee.position}</li><li><i>${employee.location}</i></li></ul>`,
+                        'data': `<ul><li>${getDepartmentById(employee.department_id)}</li><li>${employee.position}</li><li><i>${employee.location}</i></li></ul>`,
                         'tasks': `<ul><li>email: ${employee.user.email}</li><li>phone: ${employee.phone}</li><li>slack: ${employee.slack}</li></ul>`
                     }
                 }
