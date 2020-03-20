@@ -52,7 +52,7 @@ export default class Tree extends React.Component {
     
     divStyle = {
         height: '100%',
-        margin: '0px auto',
+        margin: 'none',
     };
 
     componentDidMount() {
@@ -65,7 +65,6 @@ export default class Tree extends React.Component {
                     name: `${employee.user.first_name} ${employee.user.last_name}`,
                     id: `${employee.id}`,
                     attributes: {
-                        // 'img': `${employee.image_url}`,
                         'data': `<ul><li>${getDepartmentById(employee.department_id)}</li><li>${employee.position}</li><li><i>${employee.location}</i></li></ul>`,
                         'tasks': `<ul><li>email: ${employee.user.email}</li><li>phone: ${employee.phone}</li><li>slack: ${employee.slack}</li></ul>`
                     }
@@ -83,13 +82,13 @@ export default class Tree extends React.Component {
 
             let new_config = {
                 type: 'organization down',
-                toolbar_items: {
-                    "Click Me": {
-                        events_click: function () {
-                            alert("Button clicked");
-                        }
-                    }
-                },
+                // toolbar_items: {
+                //     "Click Me": {
+                //         events_click: function () {
+                //             alert("Button clicked");
+                //         }
+                //     }
+                // },
                 line: { color: '#004080', width: 1 },
                 series: [
                     {
