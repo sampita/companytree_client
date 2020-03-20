@@ -1,0 +1,34 @@
+.navbar {
+    background-color: #4b5f8300;
+    padding: .5em;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    align-items: center;
+}
+
+li.nav {
+    list-style: none outside none;
+}
+
+#smallLogo {
+    height: 2em;
+    width: auto;
+    list-style: none outside none;
+}
+
+a.nav-link {
+    color: white;
+    text-decoration: none;
+}
+
+a.nav-link:hover {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
