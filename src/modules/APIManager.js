@@ -83,6 +83,17 @@ export default {
         .then(result => result.json());
     },
 
+    postNoAuth(endpoint, object) {
+        return fetch(`${remoteURL}/${endpoint}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(object)
+        }).then(data => data.json())
+    },
+
 
     // profile_update(route, editedItem) {
     //     return fetch(`${remoteURL}/${route}/profile_update`, {

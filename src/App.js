@@ -7,10 +7,7 @@ import { withRouter } from 'react-router-dom';
 class CompanyTree extends Component {
 
   state = {
-    user: false,
-    search: "",
-    searchResults: []
-    
+    user: false
   }
 
   isAuthenticated = () => {
