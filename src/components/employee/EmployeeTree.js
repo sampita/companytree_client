@@ -2,12 +2,6 @@ import React from 'react';
 import { JSCharting } from 'jscharting-react';
 import APIManager from '../../modules/APIManager';
 
-const getElementByXpath = (path) => {
-    return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-}
-
-// let b = getElementByXpath('//*[contains(text(),"Sam Pita")]');
-
 const getDepartmentById = (id) => {
     const departmentMap = {
         "1": "Human Resources",
@@ -55,11 +49,11 @@ export default class Tree extends React.Component {
         margin: 'none',
     };
 
-    addHackyLink(name, id) {
-        const ele =  getElementByXpath(`//*[contains(text(),"${name}")]`);
+    addHackyLink(id) {
+        const ele = document.getElementById(id);
         if (ele) {
+            console.log("flag")
             ele.onclick = () => {
-                console.log("hi")
                 this.props.history.push(`/employees/${id}`);
             }
         }
@@ -67,10 +61,10 @@ export default class Tree extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.state.config) {
-            this.state.config.series[0].points.forEach(card => {
-                this.addHackyLink(card.name, card.id);
-            })
+       if (this.state.config) {
+           this.state.config.series[0].points.forEach(card => {
+               this.addHackyLink(card.id);
+           })
         }
        
     }
@@ -81,8 +75,9 @@ export default class Tree extends React.Component {
             console.log("response", response)
             const allEmployees = [];
             for (const employee of response) {
+                const fullName = `${employee.user.first_name} ${employee.user.last_name}`
                 let newItem = {
-                    name: `${employee.user.first_name} ${employee.user.last_name}`,
+                    name: `<span id="${employee.id}">${fullName}</span>`,
                     id: `${employee.id}`,
                     attributes: {
                         'data': `<ul><li>${getDepartmentById(employee.department_id)}</li><li>${employee.position}</li><li><i>${employee.location}</i></li></ul>`,
