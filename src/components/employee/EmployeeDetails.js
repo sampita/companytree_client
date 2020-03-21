@@ -39,6 +39,11 @@ class EmployeeDetails extends Component {
         return filteredSupervisor.length > 0 && `${filteredSupervisor[0].user.first_name} ${filteredSupervisor[0].user.last_name}`
     }
 
+    deleteEmployee() {
+        APIManager.delete("employees", this.props.match.params.employeeId)
+            .then(() => this.props.history.push('/home'))
+    }
+
     componentDidMount() {
         APIManager.get("employees", this.props.match.params.employeeId)
                         .then((employee) => {
@@ -96,7 +101,7 @@ class EmployeeDetails extends Component {
                     </section>
                 </main>
                 <Button><Link to={`/employee/${this.props.match.params.employeeId}/edit`}>Edit Employee</Link></Button>
-                <Button>Delete Employee</Button>
+                <Button onClick={this.deleteEmployee.bind(this)}>Delete Employee</Button>
             </>
         )
     }
