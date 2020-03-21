@@ -2,6 +2,12 @@ import React from 'react';
 import { JSCharting } from 'jscharting-react';
 import APIManager from '../../modules/APIManager';
 
+const getElementByXpath = (path) => {
+    return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+}
+
+// let b = getElementByXpath('//*[contains(text(),"Sam Pita")]');
+
 const getDepartmentById = (id) => {
     const departmentMap = {
         "1": "Human Resources",
@@ -48,6 +54,26 @@ export default class Tree extends React.Component {
         height: '100%',
         margin: 'none',
     };
+
+    addHackyLink(name, id) {
+        const ele =  getElementByXpath(`//*[contains(text(),"${name}")]`);
+        if (ele) {
+            ele.onclick = () => {
+                console.log("hi")
+                this.props.history.push(`/employees/${id}`);
+            }
+        }
+    
+    }
+
+    componentDidUpdate() {
+        if (this.state.config) {
+            this.state.config.series[0].points.forEach(card => {
+                this.addHackyLink(card.name, card.id);
+            })
+        }
+       
+    }
 
     componentDidMount() {
         APIManager.getAll("employees")
