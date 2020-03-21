@@ -15,13 +15,7 @@ export default class Tree extends React.Component {
     state = {
         config: {
             type: 'organization down',
-            toolbar_items: {
-                "Click Me": {
-                    events_click: function () {
-                        alert("Button clicked");
-                    }
-                }
-            },
+            // chartArea_fill: [ '#3AB764' ],
             line: { color: '#004080', width: 1 },
             series: [
                 {
@@ -66,7 +60,7 @@ export default class Tree extends React.Component {
                     id: `${employee.id}`,
                     attributes: {
                         'data': `<ul><li>${getDepartmentById(employee.department_id)}</li><li>${employee.position}</li><li><i>${employee.location}</i></li></ul>`,
-                        'tasks': `<ul><li>email: ${employee.user.email}</li><li>phone: ${employee.phone}</li><li>slack: ${employee.slack}</li></ul>`
+                        'contact': `<ul><li>email: ${employee.user.email}</li><li>phone: ${employee.phone}</li><li>slack: ${employee.slack}</li></ul>`
                     }
                 }
                 if (employee.supervisor_id !== null) {
@@ -82,13 +76,7 @@ export default class Tree extends React.Component {
 
             let new_config = {
                 type: 'organization down',
-                // toolbar_items: {
-                //     "Click Me": {
-                //         events_click: function () {
-                //             alert("Button clicked");
-                //         }
-                //     }
-                // },
+                // chartArea_fill: [ '#3AB764' ],
                 line: { color: '#004080', width: 1 },
                 series: [
                     {
@@ -108,12 +96,13 @@ export default class Tree extends React.Component {
                             },
                             outline_width: 0,
                             color: '#b3d9ff',
-                            tooltip: '<b>Tasks:</b><br><span style=\'listStyleType: circle; listPadding: 0;\'>%tasks</span>'
+                            tooltip: '<b>Contact:</b><br><span style=\'listStyleType: circle; listPadding: 0;\'>%contact</span>'
                         },
                         // To use information from the database, this should map through an array of people and dynamically populate the desired fields.
                         points: allEmployees
                     }
                 ],
+                height: 500
             }
             this.setState({
                 config: new_config

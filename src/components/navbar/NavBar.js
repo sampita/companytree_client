@@ -8,14 +8,13 @@ import './NavBar.css';
 class NavBar extends Component {
     
     render() {
-        console.log("navbar props", this.props)
         return (
             <header>
                 <nav id="navbar">
                     <ul className="navbar flex">
                         <li className="nav"><Link className="nav-link" to="/"><img src={Logo} alt={"bangazon logo"} id="smallLogo" /></Link></li>
 
-                        {this.props.isAuthenticated()
+                    {this.props.isAuthenticated()
                             ? <li className="nav"><Link className="nav-link" to="/addemployee">+ Add Employee</Link></li>
                             : null}
 
