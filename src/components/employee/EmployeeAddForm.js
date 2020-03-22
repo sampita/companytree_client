@@ -68,7 +68,8 @@ class EmployeeAddForm extends Component {
                 this.setState({ departments })
             })
         APIManager.getAll('employees')
-            .then(employees => {
+            .then(async employees => {
+                employees=await JSON.parse(employees)
                 this.setState({ employees })
             })
     }
@@ -114,8 +115,9 @@ class EmployeeAddForm extends Component {
                         <label htmlFor="supervisor">Supervisor<span className="requiredText">(required)</span></label>
                         <select id="supervisor" value={this.state.supervisor} onChange={this.handleInputChange}>
                             <option value="" disabled>Select supervisor</option>
+                            <option value="">N/A</option>
                             {this.state.employees.map(employee => {
-                                return <option key={employee.id} value={employee.id}>{employee.user.last_name}, {employee.user.first_name}</option>
+                                return <option key={employee.id} value={employee.id}>{employee.last_name}, {employee.first_name}</option>
                             })}
                         </select>
                     </Form.Field>

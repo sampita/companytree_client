@@ -49,18 +49,32 @@ export default class Tree extends React.Component {
         margin: 'none',
     };
 
+    addHackyLink(id) {
+        const ele = document.getElementById(id);
+        if (ele) {
+            console.log("flag")
+            ele.onclick = () => {
+                this.props.history.push(`/employees/${id}`);
+            }
+        }
+    
+    }
+
     componentDidMount() {
         APIManager.getAll("employees")
-        .then(response => {
+        .then(async response => {
             console.log("response", response)
+            response = await JSON.parse(response);
+            console.log(response);
             const allEmployees = [];
             for (const employee of response) {
+                const fullName = `${employee.first_name} ${employee.last_name}`
                 let newItem = {
-                    name: `${employee.user.first_name} ${employee.user.last_name}`,
+                    name: `<span id="${employee.id}">${fullName}</span>`,
                     id: `${employee.id}`,
                     attributes: {
-                        'data': `<ul><li>${getDepartmentById(employee.department_id)}</li><li>${employee.position}</li><li><i>${employee.location}</i></li></ul>`,
-                        'contact': `<ul><li>email: ${employee.user.email}</li><li>phone: ${employee.phone}</li><li>slack: ${employee.slack}</li></ul>`
+                        'data': `<ul><li>${employee.name}</li><li>${employee.position}</li><li><i>${employee.location}</i></li></ul>`,
+                        'contact': `<ul><li>email: ${employee.email}</li><li>phone: ${employee.phone}</li><li>slack: ${employee.slack}</li></ul>`
                     }
                 }
                 if (employee.supervisor_id !== null) {
@@ -107,6 +121,13 @@ export default class Tree extends React.Component {
             this.setState({
                 config: new_config
             });
+            window.setTimeout(() => {
+                if (this.state.config) {
+                    this.state.config.series[0].points.forEach(card => {
+                        this.addHackyLink(card.id);
+                    })
+                 }
+            }, 500)
         })
     }
 

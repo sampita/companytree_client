@@ -15,6 +15,10 @@ class NavBar extends Component {
                         <li className="nav"><Link className="nav-link" to="/"><img src={Logo} alt={"bangazon logo"} id="smallLogo" /></Link></li>
 
                     {this.props.isAuthenticated()
+                        ? <li className="nav"><Link className="nav-link" to="/adddepartment">+ Add Department</Link></li>
+                        : null}
+
+                    {this.props.isAuthenticated()
                             ? <li className="nav"><Link className="nav-link" to="/addemployee">+ Add Employee</Link></li>
                             : null}
 

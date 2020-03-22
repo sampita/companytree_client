@@ -59,9 +59,12 @@ class EmployeeDetailsEdit extends Component {
         }))
         
         APIManager.getAll("employees")
-        .then((employees) => this.setState({
-            employees: employees
-        }))
+        .then(async (employees) => {
+            employees=await JSON.parse(employees)
+            this.setState({
+                employees: employees
+            })
+    })
     }
     
     handleSubmit() {
@@ -117,7 +120,7 @@ class EmployeeDetailsEdit extends Component {
                             <select id="supervisor_id" value={this.state.supervisor_id} onChange={this.handleInputChange}>
                                 <option value="" disabled>Select supervisor</option>
                                 {this.state.employees.map(employee => {
-                                    return <option key={employee.id} value={employee.id}>{employee.user.last_name}, {employee.user.first_name}</option>
+                                    return <option key={employee.id} value={employee.id}>{employee.last_name}, {employee.first_name}</option>
                                 })}
                             </select>
                         </Form.Field>
