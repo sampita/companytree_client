@@ -36,7 +36,7 @@ class EmployeeDetails extends Component {
     getSupervisorName() {
         const supervisorArray = this.state.employees
         let filteredSupervisor = supervisorArray.filter(supervisor => supervisor.id===this.state.supervisor_id)
-        return filteredSupervisor.length > 0 && `${filteredSupervisor[0].user.first_name} ${filteredSupervisor[0].user.last_name}`
+        return filteredSupervisor.length > 0 && `${filteredSupervisor[0].first_name} ${filteredSupervisor[0].last_name}`
     }
 
     deleteEmployee() {
@@ -49,9 +49,9 @@ class EmployeeDetails extends Component {
                         .then((employee) => {
                             console.log("employee response", employee)
                             this.setState({
-                                first_name: employee.user.first_name,
-                                last_name: employee.user.last_name,
-                                email: employee.user.email,
+                                first_name: employee.first_name,
+                                last_name: employee.last_name,
+                                email: employee.email,
                                 department_id: employee.department_id,
                                 supervisor_id: employee.supervisor_id,
                                 position: employee.position,
@@ -69,10 +69,11 @@ class EmployeeDetails extends Component {
                 departments: departments
             }))
         
-            APIManager.getAll("employees")
-                .then((employees) => this.setState({
-                    employees: employees
-                }))
+            APIManager.getAll('employees')
+            .then(async employees => {
+                employees=await JSON.parse(employees)
+                this.setState({ employees })
+            })
     }
     
 
