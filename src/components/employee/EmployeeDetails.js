@@ -49,9 +49,9 @@ class EmployeeDetails extends Component {
                         .then((employee) => {
                             console.log("employee response", employee)
                             this.setState({
-                                first_name: employee.first_name,
-                                last_name: employee.last_name,
-                                email: employee.email,
+                                first_name: employee.user.first_name,
+                                last_name: employee.user.last_name,
+                                email: employee.user.email,
                                 department_id: employee.department_id,
                                 supervisor_id: employee.supervisor_id,
                                 position: employee.position,
